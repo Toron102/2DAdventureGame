@@ -304,7 +304,7 @@ public class Player extends Entity{
 		
 		if(i != 999) {
 			
-			if(invincible == false && gp.monster[i].dying == false) {
+			if(invincible == false && gp.monster[i].dying == false && gp.monster[i].alive == true) {
 				gp.playSE(6);
 				
 				int damage  = gp.monster[i].attack - defense;
