@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.OBJ_Fireball;
 import object.OBJ_Key;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
@@ -66,6 +67,7 @@ public class Player extends Entity{
 		coin = 0;
 		currentWeapon = new OBJ_Sword_Normal(gp);
 		currentShield = new OBJ_Shield_Wood(gp);
+		projectile = new OBJ_Fireball(gp);
 		attack = getAttack();
 		defense = getDefense();
 		
@@ -219,6 +221,19 @@ public class Player extends Entity{
 				standCounter = 0;
 			}
 			
+		if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30) {
+			
+			//Set default coordinates, direction and user
+			projectile.set(worldX, worldY, direction, true, this);
+			
+			//Add it to the list
+			gp.projectileList.add(projectile);
+			
+			gp.playSE(10);
+			
+			shotAvailableCounter = 0;
+		}
+			
 		}
 		
 		if(invincible == true) {
@@ -229,7 +244,9 @@ public class Player extends Entity{
 			}
 		}
 		
-
+		if(shotAvailableCounter < 30) {
+			shotAvailableCounter++;
+		}
 	}
 
 	public void attacking() {
@@ -262,7 +279,7 @@ public class Player extends Entity{
 			
 			//check monster collision with updated world x, y, solidArea
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-			damageMonster(monsterIndex);
+			damageMonster(monsterIndex, attack);
 			
 			//after checking collision, restore original data
 			worldX = currentWorldX;
@@ -317,7 +334,7 @@ public class Player extends Entity{
 		}
 	}
 	
-	public void damageMonster(int i) {
+	public void damageMonster(int i, int attack) {
 		
 		if(i != 999) {
 			
