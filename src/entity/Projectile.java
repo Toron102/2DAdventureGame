@@ -35,6 +35,12 @@ public class Projectile extends Entity{
 		}
 		if(user != gp.player) {
 			
+			boolean contactPlayer = gp.cChecker.checkPlayer(this);
+			if(gp.player.invincible != true && contactPlayer == true) {
+				
+				damagePlayer(attack);
+				alive = false;
+			}
 		}
 		
 		switch (direction) {

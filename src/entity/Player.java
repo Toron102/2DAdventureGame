@@ -157,7 +157,6 @@ public class Player extends Entity{
 			}
 			
 			//Check tile collision
-			
 			collisionOn	= false;
 			gp.cChecker.checkTile(this);
 			
@@ -170,8 +169,10 @@ public class Player extends Entity{
 			interactNPC(npcIndex);
 			
 			//Check monster collision
+
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			contatctMonster(monsterIndex);
+			
 			
 			
 			//Check event collision
@@ -220,6 +221,15 @@ public class Player extends Entity{
 				spriteNum = 1;
 				standCounter = 0;
 			}
+		
+
+		}
+	
+		
+		if(shotAvailableCounter < 30) {
+			shotAvailableCounter++;
+		}	
+	
 			
 		if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30) {
 			
@@ -233,8 +243,7 @@ public class Player extends Entity{
 			
 			shotAvailableCounter = 0;
 		}
-			
-		}
+		
 		
 		if(invincible == true) {
 			invincibleCounter++;
@@ -244,9 +253,7 @@ public class Player extends Entity{
 			}
 		}
 		
-		if(shotAvailableCounter < 30) {
-			shotAvailableCounter++;
-		}
+
 	}
 
 	public void attacking() {
