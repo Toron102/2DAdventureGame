@@ -260,6 +260,13 @@ public class Player extends Entity{
 			}
 		}
 		
+		
+		if(life > maxLife) {
+			life = maxLife;
+		}
+		if(mana > maxMana) {
+			mana = maxMana;
+		}
 
 	}
 
@@ -314,21 +321,31 @@ public class Player extends Entity{
 		
 		if(i != 999) {
 			
-			String text;
-			
-			if(inventory.size() != maxInventorySize) {
-				inventory.add(gp.obj[i]);
-				gp.playSE(1);
-				text ="Got a " +gp.obj[i].name + "!";
+			//Pickup only items
+			if(gp.obj[i].type == type_pickupOnly) {
+				
+				gp.obj[i].use(this);
+				gp.obj[i] = null;
 			}
+			
+			//Inventory items
+			
 			else {
-				text = "You cannot carry anymore items!";
+				String text;
+				
+				if(inventory.size() != maxInventorySize) {
+					inventory.add(gp.obj[i]);
+					gp.playSE(1);
+					text ="Got a " +gp.obj[i].name + "!";
+				}
+				else {
+					text = "You cannot carry anymore items!";
+				}
+				
+				gp.ui.addMessage(text);
+				gp.obj[i] = null;
 			}
-			
-			gp.ui.addMessage(text);
-			gp.obj[i] = null;
 		}
-		
 	}
 	
 	public void contatctMonster(int i) {
