@@ -172,9 +172,11 @@ public class Player extends Entity{
 			interactNPC(npcIndex);
 			
 			//Check monster collision
-
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			contatctMonster(monsterIndex);
+			
+			//Check interactive tile collision
+			gp.cChecker.checkEntity(this, gp.iTile);
 			
 			
 			
@@ -302,6 +304,10 @@ public class Player extends Entity{
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			damageMonster(monsterIndex, attack);
 			
+			
+			int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+			damageInteractiveTile(iTileIndex);
+			
 			//after checking collision, restore original data
 			worldX = currentWorldX;
 			worldY = currentWorldY;
@@ -391,6 +397,14 @@ public class Player extends Entity{
 					checkLvlUp();
 				}
 			}
+		}
+	}
+	
+	public void damageInteractiveTile(int i) {
+		
+		if(i != 999 && gp.iTile[i].destructible == true) {
+			
+			gp.iTile[i] = null;
 		}
 	}
 
