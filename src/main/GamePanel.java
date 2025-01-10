@@ -58,6 +58,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public AssetSetter aSetter = new AssetSetter(this);
 	public UI ui = new UI(this);
 	public EventHandler eHandler = new EventHandler(this);
+	Config config = new Config(this);
 	Thread gameThread;
 	
 	//Entity and Object
@@ -101,8 +102,9 @@ public class GamePanel extends JPanel implements Runnable{
 		g2 = (Graphics2D)tempScreen.getGraphics();
 		
 		
-		//Uncomment to turn fullscreen on
-//		setFullScreen();
+		if(fullScreenOn == true) {
+			setFullScreen();
+		}
 	}
 	
 	public void setFullScreen() {

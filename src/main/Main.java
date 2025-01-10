@@ -15,12 +15,15 @@ public class Main {
 		window.setResizable(false);
 		window.setTitle("2D Game");
 		
-		//Uncomment to disable top bar
-//		window.setUndecorated(true);
 
 		GamePanel gamePanel = new GamePanel();
 		window.add(gamePanel);
 
+		gamePanel.config.loadCOnfig();
+		if(gamePanel.fullScreenOn == true) {
+			window.setUndecorated(true);
+		}
+		
 		window.pack();
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
