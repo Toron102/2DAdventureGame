@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -66,11 +67,14 @@ public class Entity {
 	public Projectile projectile;
 	
 	//Item attributes
+	public ArrayList<Entity> inventory = new ArrayList<>();
+	public final int maxInventorySize = 20;
 	public int value;
 	public int attackValue;
 	public int defenseValue;
 	public String description = "";
 	public int useCost;
+	public int price;
 	
 	//Type
 	public int type;
