@@ -38,6 +38,7 @@ public class Entity {
 	public boolean dying = false;
 	boolean hpBarOn = false;
 	public boolean onPath = false;
+	public boolean knockBack = false;
 	
 	//Counter
 	public int spriteCounter = 0;
@@ -47,9 +48,11 @@ public class Entity {
 	public int aggroCounter = 0;
 	int dyingCounter = 0;
 	int hpBarCounter = 0;
+	int knockBackCounter = 0;
 	
 	//Character attributes
 	public String name;
+	public int defaultSpeed;
 	public int maxLife;
 	public int life;
 	public int speed;
@@ -77,6 +80,7 @@ public class Entity {
 	public String description = "";
 	public int useCost;
 	public int price;
+	public int knockBackPower = 0;
 	
 	//Type
 	public int type;
@@ -190,18 +194,47 @@ public class Entity {
 	
 	public void update() {
 		
-		setAction();
-		checkCollision();
-		
-		if(collisionOn == false) {
+		if(knockBack == true) {
 			
-			switch(direction) {
-			case "up": worldY -= speed; break;
-			case "down": worldY += speed; break;
-			case "left": worldX -= speed; break;
-			case "right": worldX += speed; break;
+			checkCollision();
+			
+			if(collisionOn == true) {
+				knockBackCounter = 0;
+				knockBack = false;
+				speed = defaultSpeed;
+			}
+			else if(collisionOn == false) {
+				switch(gp.player.direction) {
+				case "up": worldY -= speed; break;
+				case "down": worldY += speed; break;
+				case "left": worldX -= speed; break;
+				case "right": worldX += speed; break;
+				}
+			}
+			
+			knockBackCounter++;
+			if(knockBackCounter == 10) {
+				knockBackCounter = 0;
+				knockBack = false;
+				speed = defaultSpeed;
 			}
 		}
+		else {
+			setAction();
+			checkCollision();
+			
+			if(collisionOn == false) {
+				
+				switch(direction) {
+				case "up": worldY -= speed; break;
+				case "down": worldY += speed; break;
+				case "left": worldX -= speed; break;
+				case "right": worldX += speed; break;
+				}
+			}
+		}
+		
+
 		
 		spriteCounter++;
 		if(spriteCounter > (20)) {
