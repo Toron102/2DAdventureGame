@@ -53,9 +53,13 @@ public class Player extends Entity{
 		
 		worldX = gp.tileSize * 23;
 		worldY = gp.tileSize * 21;
+		
+		//For testing merchant's hut
 //		worldX = gp.tileSize * 12;
 //		worldY = gp.tileSize * 12;
 //		gp.currentMap = 1;
+		
+		gp.currentMap = 0;
 		defaultSpeed = 4;
 		speed = defaultSpeed;
 		direction = "down";
@@ -386,8 +390,7 @@ public class Player extends Entity{
 			else {
 				String text;
 				
-				if(inventory.size() != maxInventorySize) {
-					inventory.add(gp.obj[gp.currentMap][i]);
+				if(canObtainItem(gp.obj[gp.currentMap][i]) == true) {
 					gp.playSE(1);
 					text ="Got a " +gp.obj[gp.currentMap][i].name + "!";
 					gp.obj[gp.currentMap][i] = null;
@@ -548,10 +551,58 @@ public class Player extends Entity{
 			if (selectedItem.type == type_consumable) {
 				
 				if(selectedItem.use(this) == true) {
-					inventory.remove(itemIndex);
+					if(selectedItem.amount > 1) {
+						selectedItem.amount--;
+					}
+					else {
+						inventory.remove(itemIndex);
+					}
+
 				}
 			}
 		}
+	}
+	
+	public int searchItemInInventory(String itemName) {
+		
+		int itemIndex =  999;
+		
+		for(int i = 0; i <inventory.size(); i++) {
+			if(inventory.get(i).name.equals(itemName)) {
+				itemIndex = i;
+				break;
+			}
+		}
+		return itemIndex;
+	}
+	
+	public boolean canObtainItem(Entity item) {
+		
+		boolean canObtain = false;
+		
+		//Check if stackable
+		if(item.stackable == true) {
+			
+			int index = searchItemInInventory(item.name);
+			
+			if(index != 999) {
+				inventory.get(index).amount++;
+				canObtain = true;
+			}
+			else { //New item, checking vacancy
+				if(inventory.size() != maxInventorySize) {
+					inventory.add(item);
+					canObtain = true;
+				}
+			}
+		}
+		else { //Not stackable, checking vacancy
+			if(inventory.size() != maxInventorySize) {
+				inventory.add(item);
+				canObtain = true;
+			}
+		}
+		return canObtain;
 	}
 	
 	public void draw(Graphics2D g2) {
