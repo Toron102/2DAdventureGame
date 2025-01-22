@@ -21,7 +21,7 @@ import object.OBJ_ManaCrystal;
 public class UI {
 
 	GamePanel gp;
-	Font maruMonica;
+	public Font maruMonica;
 	BufferedImage heart_full, heart_half, heart_blank, crystal_full, crystal_blank, coin;
 	Graphics2D g2;
 	public boolean messageOn = false;
