@@ -9,7 +9,6 @@ public class OBJ_Potion_Red extends Entity{
 	
 	public OBJ_Potion_Red(GamePanel gp) {
 		super(gp);
-		
 		this.gp = gp;
 		
 		type = type_consumable;
