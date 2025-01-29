@@ -18,6 +18,17 @@ public class OBJ_Potion_Red extends Entity{
 		description = "[" + name + "]\n" + "Heals you by up to" + value +" HP.";
 		price = 25;
 		stackable = true;
+		
+		setDialogue();
+	}
+	
+	public void setDialogue() {
+		
+		dialogues[0][0] = "You drink the " + name + "!\n"
+				+ "Your life has been recovered by " + value + ".";
+		
+		dialogues[1][0] = "You drink the " + name + "!\n"
+				+ "Your life has been recovered by " + (gp.player.maxLife-gp.player.life) + ".";
 	}
 	
 	public boolean use(Entity entity) {
@@ -27,13 +38,11 @@ public class OBJ_Potion_Red extends Entity{
 		int playerMissingHealth = gp.player.maxLife-gp.player.life;
 		
 		if(playerMissingHealth > value) {
-			gp.ui.currentDialogue = "You drink the " + name + "!\n"
-					+ "Your life has been recovered by " + value + ".";
+			startDialogue(this, 0);
 			gp.player.life += value;
 		}
 		else {
-			gp.ui.currentDialogue = "You drink the " + name + "!\n"
-					+ "Your life has been recovered by " + (gp.player.maxLife-gp.player.life) + ".";
+			startDialogue(this, 1);
 			gp.player.life += value;
 		}
 

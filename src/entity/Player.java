@@ -59,7 +59,6 @@ public class Player extends Entity{
 //		worldY = gp.tileSize * 12;
 //		gp.currentMap = 1;
 		
-		gp.currentMap = 0;
 		defaultSpeed = 4;
 		speed = defaultSpeed;
 		direction = "down";
@@ -87,6 +86,7 @@ public class Player extends Entity{
 		getAttackImage();
 		getGuardImage();
 		setItems();
+		setDialogue();
 		
 	}
 	
@@ -97,10 +97,18 @@ public class Player extends Entity{
 		direction = "down";
 	}
 	
+	public void setDialogue() {
+		
+		dialogues[0][0] = "You are level " + level + " now\n"
+				+ "You fell stronger!";
+		
+	}
+	
 	public void restoreStatus() {
 		
 		life = maxLife;
 		mana = maxMana;
+		speed = defaultSpeed;
 		invincible = false;
 		transparent = false;
 		attacking = false;
@@ -532,20 +540,20 @@ public class Player extends Entity{
 			
 			gp.playSE(8);
 			gp.gameState = gp.dialogueState;
-			gp.ui.currentDialogue = "You are level " + level + " now\n"
-					+ "You fell stronger!";
+			startDialogue(this, 0);
 		}
 	}
 	
 	public void interactNPC(int i) {
 		
-		if(gp.keyH.enterPressed == true) {
-			if(i != 999) {
+		if(i != 999) {
+			
+			if(gp.keyH.enterPressed == true) {
 				attackCanceled = true;
-				gp.gameState = gp.dialogueState;
 				gp.npc[gp.currentMap][i].speak();
-			}
 		}
+		}
+
 	}
 	
 	public void selectItem() {
