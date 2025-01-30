@@ -7,13 +7,15 @@ public class OBJ_Heart extends Entity{
 
 	GamePanel gp;
 
+	public static final String objName = "Heart";
+	
 	public OBJ_Heart(GamePanel gp) {
 		super(gp);
 		this.gp = gp;
 		
 		type = type_pickupOnly;
 		value = 2;
-		name = "Heart";
+		name = objName;
 		down1 = setup("/objects/heart_full", gp.tileSize, gp.tileSize);
 		image1 = setup("/objects/heart_full", gp.tileSize, gp.tileSize);
 		image2 = setup("/objects/heart_half", gp.tileSize, gp.tileSize);

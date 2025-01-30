@@ -43,8 +43,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public int FPS = 60;
 	
 	//World settings
-	public final int maxWorldCol = 50;
-	public final int maxWorldRow = 50;
+	public int maxWorldCol;
+	public int maxWorldRow;
 	public final int maxMap = 10;
 	public int currentMap = 0;
 	
@@ -70,6 +70,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public EnvironmentManager eManager = new EnvironmentManager(this);
 	Map map = new Map(this);
 	SaveLoad saveLoad = new SaveLoad(this);
+	public EntityGenerator eGenerator = new EntityGenerator(this);
 	Thread gameThread;
 	
 	//Entity and Object

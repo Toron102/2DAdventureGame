@@ -842,10 +842,10 @@ public class Entity {
 		int nextWorldY = user.getTopY();
 		
 		switch(user.direction) {
-		case "up": nextWorldX = user.getTopY()-gp.player.speed; break;
+		case "up": nextWorldY = user.getTopY()-gp.player.speed; break;
 		case "down": nextWorldY = user.getBotY()+gp.player.speed; break;
 		case "left": nextWorldX = user.getLeftX()-gp.player.speed; break;
-		case "right": nextWorldY = user.getRightX()+gp.player.speed; break;
+		case "right": nextWorldX = user.getRightX()+gp.player.speed; break;
 		}
 		
 		int col = nextWorldX/gp.tileSize;

@@ -35,12 +35,12 @@ public class Player extends Entity{
 		screenY = gp.screenHeight/2 - (gp.tileSize/2);
 		
 		solidArea = new Rectangle();
-		solidArea.x = 14;
-		solidArea.y = 18;
+		solidArea.x = 12;
+		solidArea.y = 16;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-		solidArea.width = 22;
-		solidArea.height = 22;
+		solidArea.width = 20;
+		solidArea.height = 20;
 		
 //		attackArea.width = 36;
 //		attackArea.height = 36;
@@ -123,6 +123,8 @@ public class Player extends Entity{
 		inventory.add(currentWeapon);
 		inventory.add(currentShield);
 		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+
 		inventory.add(new OBJ_Axe(gp));
 
 	}
@@ -540,6 +542,7 @@ public class Player extends Entity{
 			
 			gp.playSE(8);
 			gp.gameState = gp.dialogueState;
+			setDialogue();
 			startDialogue(this, 0);
 		}
 	}
@@ -620,10 +623,12 @@ public class Player extends Entity{
 		
 		boolean canObtain = false;
 		
+		Entity newItem = gp.eGenerator.getObject(item.name);
+		
 		//Check if stackable
-		if(item.stackable == true) {
+		if(newItem.stackable == true) {
 			
-			int index = searchItemInInventory(item.name);
+			int index = searchItemInInventory(newItem.name);
 			
 			if(index != 999) {
 				inventory.get(index).amount++;
@@ -631,14 +636,14 @@ public class Player extends Entity{
 			}
 			else { //New item, checking vacancy
 				if(inventory.size() != maxInventorySize) {
-					inventory.add(item);
+					inventory.add(newItem);
 					canObtain = true;
 				}
 			}
 		}
 		else { //Not stackable, checking vacancy
 			if(inventory.size() != maxInventorySize) {
-				inventory.add(item);
+				inventory.add(newItem);
 				canObtain = true;
 			}
 		}
