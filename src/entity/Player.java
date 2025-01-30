@@ -57,7 +57,7 @@ public class Player extends Entity{
 		//For testing merchant's hut
 //		worldX = gp.tileSize * 12;
 //		worldY = gp.tileSize * 12;
-//		gp.currentMap = 1;
+//		gp.currentMap = 2;
 		
 		defaultSpeed = 4;
 		speed = defaultSpeed;

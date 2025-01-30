@@ -69,13 +69,13 @@ public class EventHandler{
 			if(hit(0,27,16,"right") == true) {damagePit(gp.dialogueState);}
 			else if(hit(0,23,19,"any") == true) {damagePit(gp.dialogueState);}
 			else if(hit(0,23,12,"up") == true ) {healingPool(gp.dialogueState);}
-			else if(hit(0,10,39,"any") == true) {teleport(1, 12, 13);} //To merchant house
-			else if(hit(1,12,13,"any") == true) {teleport(0,10,39);} //From merchant house
+			else if(hit(0,10,39,"any") == true) {teleport(1, 12, 13, gp.indoor);} //To merchant house
+			else if(hit(1,12,13,"any") == true) {teleport(0,10,39, gp.outside);} //From merchant house
 			else if(hit(1,12,9,"up") == true) {speak(gp.npc[1][0]);}
-			else if(hit(0,12,9,"any") == true) {teleport(2, 9, 41);} //To the dungeon
-			else if(hit(2,9,41,"any") == true) {teleport(0, 12, 9);} //To outside
-			else if(hit(2,8,7,"any") == true) {teleport(3, 26, 41);} //To B2
-			else if(hit(3,26,41,"any") == true) {teleport(2, 8, 7);} //To B1
+			else if(hit(0,12,9,"any") == true) {teleport(2, 9, 41,gp.dungeon);} //To the dungeon
+			else if(hit(2,9,41,"any") == true) {teleport(0, 12, 9, gp.outside);} //To outside
+			else if(hit(2,8,7,"any") == true) {teleport(3, 26, 41,gp.dungeon);} //To B2
+			else if(hit(3,26,41,"any") == true) {teleport(2, 8, 7,gp.dungeon);} //To B1
 
 
 		 }
@@ -134,9 +134,10 @@ public class EventHandler{
 		}
 	}
 	
-	public void teleport(int map, int col, int row) {
+	public void teleport(int map, int col, int row, int area) {
 		
 		gp.gameState = gp.transitionState;
+		gp.nextArea = area;
 		tempMap = map;
 		tempCol = col;
 		tempRow = row;
