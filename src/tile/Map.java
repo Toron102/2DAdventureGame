@@ -83,8 +83,8 @@ public class Map extends TileManager{
 			//Draw map
 			int width = 200;
 			int height = 200;
-			int x = gp.screenWidth - width - (gp.tileSize*2);
-			int y = (gp.tileSize*2);
+			int x = gp.screenWidth - width - (gp.tileSize);
+			int y = (gp.tileSize);
 			
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.9f));
 			g2.drawImage(worldMap[gp.currentMap], x, y, width, height, null);
