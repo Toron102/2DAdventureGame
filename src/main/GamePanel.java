@@ -372,13 +372,14 @@ public class GamePanel extends JPanel implements Runnable{
 			g2.setFont(new Font("Arial", Font.PLAIN, 20));
 			g2.setColor(Color.white);
 			int x = 10;
-			int y = 400;
+			int y = 300;
 			int lineHeight = 40;
 			
 			g2.drawString("WorldX " + player.worldX, x, y); y += lineHeight;
 			g2.drawString("WorldY " + player.worldY, x, y); y += lineHeight;
 			g2.drawString("Col " + ((player.worldX + player.solidArea.x)/tileSize), x, y); y += lineHeight;
 			g2.drawString("Row " + ((player.worldY + player.solidArea.y)/tileSize), x, y); y += lineHeight;
+			g2.drawString("God mode: " + keyH.godModeOn, x, y); y += lineHeight;
 			
 			g2.drawString("Draw Time "+ passed, x, y);
 			System.out.println("Draw Time "+ passed);

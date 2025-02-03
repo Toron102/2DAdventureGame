@@ -60,9 +60,9 @@ public class Player extends Entity{
 //		worldY = gp.tileSize * 12;
 //		gp.currentMap = 1;
 		
-		worldX = gp.tileSize * 16;
+		worldX = gp.tileSize * 25;
 		worldY = gp.tileSize * 40;
-		gp.currentMap = 2;
+		gp.currentMap = 3;
 		
 		defaultSpeed = 4;
 		speed = defaultSpeed;
@@ -75,7 +75,7 @@ public class Player extends Entity{
 		maxMana = 4;
 		mana = maxMana;
 		ammo = 10;
-		strength = 1;
+		strength = 5;
 		dexterity = 1;
 		exp = 0;
 		nextLevelExp = 5;
@@ -406,13 +406,17 @@ public class Player extends Entity{
 		if(mana > maxMana) {
 			mana = maxMana;
 		}
-		
-		if(life <= 0) {
-			gp.gameState = gp.gameOverState;
-			gp.ui.commandNum = -1;
-			gp.stopMusic();
-			gp.playSE(12);
+		if(keyH.godModeOn == false) {
+			if(life <= 0) {
+				gp.gameState = gp.gameOverState;
+				gp.ui.commandNum = -1;
+				gp.stopMusic();
+				gp.playSE(12);
+			}
 		}
+		
+		
+
 		
 		if(cannotPickUpItemCounter < 120) {
 			cannotPickUpItemCounter++;

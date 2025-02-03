@@ -50,6 +50,7 @@ public class Entity {
 	public boolean offBalance = false;
 	public Entity loot;
 	public boolean opened = false;
+	public boolean inRage = false;
 	
 	//Counter
 	public int spriteCounter = 0;
@@ -472,7 +473,7 @@ public class Entity {
 		
 		actionLockCounter ++;
 		
-		if(actionLockCounter == (interval)) {
+		if(actionLockCounter > (interval)) {
 			Random random = new Random();
 			int i = random.nextInt(100)+1;
 			
@@ -480,6 +481,32 @@ public class Entity {
 			if(i > 25 && i <= 50) {direction = "down";}
 			if(i > 50 && i <= 75) {direction = "left";}
 			if(i >75 && i <= 100) {direction = "right";}
+			actionLockCounter = 0;
+		}
+	}
+	
+	public void moveTowardPlayer(int interval) {
+		
+		actionLockCounter ++;
+		
+		if(actionLockCounter > interval) {
+			
+			if(getXDistance(gp.player) > getYDistance(gp.player)) {
+				if(gp.player.getCenterX() < getCenterX()) {
+					direction  = "left";
+				}
+				else {
+					direction = "right";
+				}
+			}
+			else if(getXDistance(gp.player) < getYDistance(gp.player)) {
+				if(gp.player.getCenterY() < getCenterY()) {
+					direction = "up";
+				}
+				else {
+					direction = "down";
+				}
+			}
 			actionLockCounter = 0;
 		}
 	}
@@ -620,9 +647,9 @@ public class Entity {
 		int screenX = worldX - gp.player.worldX + gp.player.screenX;
 		int screenY = worldY - gp.player.worldY + gp.player.screenY;
 		
-		if(worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
+		if(worldX + gp.tileSize*5 > gp.player.worldX - gp.player.screenX &&
 		   worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-		   worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
+		   worldY + gp.tileSize*5 > gp.player.worldY - gp.player.screenY &&
 		   worldY - gp.tileSize < gp.player.worldY + gp.player.screenY){
 			
 			int tempScreenX = screenX;
