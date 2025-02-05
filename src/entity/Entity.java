@@ -53,6 +53,7 @@ public class Entity {
 	public boolean opened = false;
 	public boolean inRage = false;
 	public boolean sleep =  false;
+	public boolean drawing = true;
 	
 	//Counter
 	public int spriteCounter = 0;
