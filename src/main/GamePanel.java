@@ -425,6 +425,10 @@ public class GamePanel extends JPanel implements Runnable{
 		
 	}
 	
+	public void stopSE() {
+		se.stop();
+	}
+	
 	public void changeArea() {
 		
 		if(nextArea != currentArea) {

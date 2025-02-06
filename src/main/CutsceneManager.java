@@ -166,9 +166,12 @@ public class CutsceneManager {
 		if(scenePhase == 3) {
 			
 			//Wait until sound effect ends
-			if(counterReached(300) == true) {
+			if(counterReached(300) == true || gp.keyH.enterPressed == true) {
+				gp.stopSE();
 				scenePhase++;
+				gp.keyH.enterPressed = false;
 			}
+			
 		}
 		if(scenePhase == 4) {
 			
@@ -179,10 +182,12 @@ public class CutsceneManager {
 			}
 			drawBlackBackground(alpha);
 			
-			if(alpha == 1f) {
+			if(alpha == 1f || gp.keyH.enterPressed == true) {
 				alpha = 0;
 				scenePhase++;
+				gp.keyH.enterPressed = false;
 			}
+			
 		}
 		if(scenePhase == 5) {
 			
@@ -200,9 +205,10 @@ public class CutsceneManager {
 			
 			drawString(alpha, 38f, 200, text, 70);
 			
-			if(counterReached(600) == true) {
+			if(counterReached(600) == true || gp.keyH.enterPressed == true) {
 				gp.playMusic(0);
 				scenePhase++;
+				gp.keyH.enterPressed = false;
 			}
 		}
 		if(scenePhase == 6) {
@@ -211,8 +217,9 @@ public class CutsceneManager {
 			
 			drawString(1f, 120f, gp.screenHeight/2, "Blue Boy Adventure", 40);
 			
-			if(counterReached(480) == true) {
+			if(counterReached(480) == true || gp.keyH.enterPressed == true) {
 				scenePhase++;
+				gp.keyH.enterPressed = false;
 			}
 		}
 		if(scenePhase == 7) {
@@ -222,8 +229,9 @@ public class CutsceneManager {
 			y = gp.screenHeight/2;
 			drawString(1f, 38f, y, endCredits, 40);
 			
-			if(counterReached(480) == true) {
+			if(counterReached(480) == true || gp.keyH.enterPressed == true) {
 				scenePhase++;
+				gp.keyH.enterPressed = false;
 			}
 		}
 		if(scenePhase == 8) {
@@ -236,6 +244,7 @@ public class CutsceneManager {
 			
 			if(gp.keyH.enterPressed == true) {
 				gp.gameState = gp.titleState;
+				gp.keyH.enterPressed = false;
 			}
 		}
 	}

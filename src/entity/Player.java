@@ -4,15 +4,12 @@ import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import main.GamePanel;
 import main.KeyHandler;
 import object.OBJ_Axe;
 import object.OBJ_Fireball;
 import object.OBJ_Key;
-import object.OBJ_Lantern;
-import object.OBJ_Potion_Red;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
@@ -52,17 +49,16 @@ public class Player extends Entity{
 	
 	public void setDefaultValues() {
 		
-		worldX = gp.tileSize * 23;
-		worldY = gp.tileSize * 21;
+		setDefaultPositions();
 		
 		//For testing merchant's hut
 //		worldX = gp.tileSize * 12;
 //		worldY = gp.tileSize * 12;
 //		gp.currentMap = 1;
 		
-		worldX = gp.tileSize * 25;
-		worldY = gp.tileSize * 13;
-		gp.currentMap = 3;
+//		worldX = gp.tileSize * 25;
+//		worldY = gp.tileSize * 13;
+//		gp.currentMap = 3;
 		
 		defaultSpeed = 4;
 		speed = defaultSpeed;
