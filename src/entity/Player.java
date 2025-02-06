@@ -61,7 +61,7 @@ public class Player extends Entity{
 //		gp.currentMap = 1;
 		
 		worldX = gp.tileSize * 25;
-		worldY = gp.tileSize * 40;
+		worldY = gp.tileSize * 13;
 		gp.currentMap = 3;
 		
 		defaultSpeed = 4;

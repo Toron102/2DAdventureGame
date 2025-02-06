@@ -1,5 +1,6 @@
 package main;
 
+import data.Progress;
 import entity.NPC_BigRock;
 import entity.NPC_Merchant;
 import entity.NPC_OldMan;
@@ -9,6 +10,7 @@ import monster.MON_Orc;
 import monster.MON_RedSlime;
 import monster.MON_SkeletonLord;
 import object.OBJ_Axe;
+import object.OBJ_BlueHeart;
 import object.OBJ_Chest;
 import object.OBJ_Coin_Bronze;
 import object.OBJ_Door;
@@ -109,6 +111,9 @@ public class AssetSetter {
 		gp.obj[mapNum][i].worldX = gp.tileSize*25;
 		gp.obj[mapNum][i].worldY = gp.tileSize*15;
 		i++;
+		gp.obj[mapNum][i] = new OBJ_BlueHeart(gp);
+		gp.obj[mapNum][i].worldX = gp.tileSize*25;
+		gp.obj[mapNum][i].worldY = gp.tileSize*8;
 
 	}
 	
@@ -212,10 +217,13 @@ public class AssetSetter {
 		
 		mapNum = 3;
 		i = 0;
-		gp.monster[mapNum][i] = new MON_SkeletonLord(gp);
-		gp.monster[mapNum][i].worldX = gp.tileSize*23;
-		gp.monster[mapNum][i].worldY = gp.tileSize*16;
-		i++;
+		if(Progress.skeletonLordDefeated == false) {
+			gp.monster[mapNum][i] = new MON_SkeletonLord(gp);
+			gp.monster[mapNum][i].worldX = gp.tileSize*23;
+			gp.monster[mapNum][i].worldY = gp.tileSize*16;
+			i++;
+		}
+
 	}
 	
 	public void setInteractiveTile() {

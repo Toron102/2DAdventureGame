@@ -22,6 +22,7 @@ import tile_interactive.InteractiveTile;
 import javax.swing.JPanel;
 
 import ai.PathFinder;
+import data.Progress;
 import data.SaveLoad;
 
 public class GamePanel extends JPanel implements Runnable{
